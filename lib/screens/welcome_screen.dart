@@ -18,7 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       decoration: BoxDecoration(
 
         image: DecorationImage(
-          image: AssetImage('images/BloodDonate2.jpg'),
+          image: const AssetImage('images/BloodDonate2.jpg'),
           fit: BoxFit.fill,
           colorFilter: ColorFilter.mode(Colors.red.withOpacity(0.6),
               BlendMode.darken,),

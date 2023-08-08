@@ -68,7 +68,8 @@ class _UserScreenState extends State<UserScreen> {
                            icon: Icon(Icons.phone),
                            onPressed: (){
                              // String call="91${userMap["phoneNumber"]}";
-                             FlutterPhoneDirectCaller.callNumber(userMap["phoneNumber"]);
+                             String phoneNumber="+91"+userMap["phoneNumber"];
+                             FlutterPhoneDirectCaller.callNumber(phoneNumber);
                            },
                          ),
                          // subtitle:Text(userMap["location"]) ,

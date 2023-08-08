@@ -1,51 +1,46 @@
 import 'package:blood_bank/constants.dart';
-import 'package:blood_bank/screens/admin_screen.dart';
+import 'package:blood_bank/screens/admin_home.dart';
+import 'package:blood_bank/screens/admin_blood_screen.dart';
 import 'package:blood_bank/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_bank/components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
-import 'package:blood_bank/constants.dart';
 
 class LoginScreen extends StatefulWidget {
-  static String loginsId='login_screen';
+  static String loginsId = 'login_screen';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
   // late String email,password;
 
-  TextEditingController passwordController=TextEditingController();
-  TextEditingController emailController=TextEditingController();
-  void login()async{
-    String email=emailController.text.trim();
-    String password=passwordController.text.trim();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
-    try{
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+  void login() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
 
-      if(userCredential.user!=null){
-          Navigator.popUntil(context, (route) =>route.isFirst );
-        if(email=="iib2020018@gmail.com"){
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
 
-          Navigator.pushReplacement(context,CupertinoPageRoute(builder: (context)=>AdminScreen()));
-
+      if (userCredential.user != null) {
+        Navigator.popUntil(context, (route) => route.isFirst);
+        if (email == "iib2020018@iiita.ac.in") {
+          Navigator.pushReplacement(
+              context, CupertinoPageRoute(builder: (context) => AdminHome()));
+        } else {
+          Navigator.pushReplacement(
+              context, CupertinoPageRoute(builder: (context) => HomeScreen()));
         }
-       else {
-          Navigator.pushReplacement(context,CupertinoPageRoute(builder: (context)=>HomeScreen()));
-
-        }
-
       }
-
-    }
-    on FirebaseAuthException catch(e){
-
-      if(e.code=='user-not-found'){
-
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: Colors.orangeAccent,
@@ -55,9 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         );
-      }
-      else if(e.code=='wrong-password'){
-
+      } else if (e.code == 'wrong-password') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: Colors.orangeAccent,
@@ -67,17 +60,16 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         );
-      }
-      else{
+      } else {
         log(e.code);
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.redAccent,
-
+      // backgroundColor: Colors.redAccent,
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
@@ -94,9 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
               controller: emailController,
 
-              textAlign:TextAlign.center,
+              textAlign: TextAlign.center,
               keyboardType: TextInputType.emailAddress,
-              decoration: kTextFileDecoration.copyWith(hintText: 'Login Using Email'),
+              decoration:
+                  kTextFileDecoration.copyWith(hintText: 'Login Using Email'),
               // onChanged: (value){
               //   email=value;
               // },
@@ -107,18 +100,18 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
               controller: passwordController,
               obscureText: true,
-              textAlign:TextAlign.center,
-              decoration: kTextFileDecoration.copyWith(hintText: 'Enter Password'),
-
-
+              textAlign: TextAlign.center,
+              decoration:
+                  kTextFileDecoration.copyWith(hintText: 'Enter Password'),
             ),
-            RoundedButton(title: "Login",
-                colour: Colors.blueAccent, onPressed :(){
-              login();
+            RoundedButton(
+                title: "Login",
+                colour: Colors.blueAccent,
+                onPressed: () {
+                  login();
                 }),
           ],
         ),
-
       ),
     );
   }
