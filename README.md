@@ -1,4 +1,8 @@
 ## About Project
+ This app has two users : Normal user, admin.
+ Any user who register on our app can check availability of blood in blood bank or can register for donating blood and the admin can manage the blood
+ bank as well as the donors registered for blood donation.
+
 
 
 ## [Project Presentation](https://docs.google.com/presentation/d/1gAqLGnI-VElM1oBm7CzFcgsayYcl3P7aegI5acxpkRQ/edit?usp=sharing)
