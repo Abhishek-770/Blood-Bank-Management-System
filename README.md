@@ -1,6 +1,7 @@
-# blood_bank
+## About Project
 
-A new Flutter project.
+
+## [Project Presentation](https://docs.google.com/presentation/d/1gAqLGnI-VElM1oBm7CzFcgsayYcl3P7aegI5acxpkRQ/edit?usp=sharing)
 
 ## Getting Started
 
